@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShowDetailActivity">
+    tools:context=".Activity.ShowDetailActivity">
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -36,7 +36,8 @@
                 android:text="S/."
                 android:textAlignment="center"
                 android:textColor="#ff5e00"
-                android:textSize="24sp" />
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/picFood"

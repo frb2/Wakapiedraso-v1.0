@@ -1,4 +1,4 @@
-package com.example.waka;
+package com.example.waka.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.waka.Domain.BebidasDomain;
 import com.example.waka.Helper.ManagementCart;
+import com.example.waka.R;
 
 public class ShowDetailActivity extends AppCompatActivity {
     private TextView addToCartBtn;

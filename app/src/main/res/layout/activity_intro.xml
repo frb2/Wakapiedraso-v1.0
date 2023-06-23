@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:id="@+id/pantalla"
     android:background="#161329"
-    tools:context=".IntroActivity">
+    tools:context=".Activity.IntroActivity">
 
     <TextView
         android:id="@+id/texto"

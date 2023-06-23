@@ -1,18 +1,24 @@
-package com.example.waka;
+package com.example.waka.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.example.waka.Adaptor.BebidasAdaptor;
+import com.example.waka.Adaptor.CartListAdaptor;
 import com.example.waka.Adaptor.PlatoFondoAdaptor;
 import com.example.waka.Adaptor.PlatosAdaptor;
 import com.example.waka.Domain.BebidasDomain;
 import com.example.waka.Domain.PlatoFondoDomain;
 import com.example.waka.Domain.PlatosDomain;
+import com.example.waka.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -28,7 +34,20 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerViewCategory();
         recyclerViewBebidas();
+       // bottomNavigation();
     }
+
+    /*private void bottomNavigation(){
+        FloatingActionButton floatingActionButton=findViewById(R.id.cartBtn);
+        //LinearLayout homeBtn=findViewById(R.id)
+        floatingActionButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                startActivity(new Intent(MainActivity.this, CartListActivity.class));
+
+            }
+        });
+    }*/
+
 
     private void recyclerViewCategory(){
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);

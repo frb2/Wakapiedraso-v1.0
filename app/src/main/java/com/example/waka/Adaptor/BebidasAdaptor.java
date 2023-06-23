@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.waka.Domain.BebidasDomain;
 import com.example.waka.R;
-import com.example.waka.ShowDetailActivity;
+import com.example.waka.Activity.ShowDetailActivity;
 
 import java.util.ArrayList;
 
