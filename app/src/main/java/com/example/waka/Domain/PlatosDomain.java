@@ -1,22 +1,20 @@
 package com.example.waka.Domain;
 
-import java.io.Serializable;
-
-public class BebidasDomain implements Serializable {
+public class PlatosDomain {
     private String nombre;
     private String pic;
     private String descripcion;
     private Double fee;
     private int numberInCart;
 
-    public BebidasDomain(String nombre, String pic, String descripcion, Double fee) {
+    public PlatosDomain(String nombre, String pic, String descripcion, Double fee) {
         this.nombre = nombre;
         this.pic = pic;
         this.descripcion = descripcion;
         this.fee = fee;
     }
 
-    public BebidasDomain(String nombre, String pic, String descripcion, Double fee, int numberInCart) {
+    public PlatosDomain(String nombre, String pic, String descripcion, Double fee, int numberInCart) {
         this.nombre = nombre;
         this.pic = pic;
         this.descripcion = descripcion;
