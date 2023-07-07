@@ -1,6 +1,8 @@
 package com.example.waka.Domain;
 
-public class PlatosDomain {
+import java.io.Serializable;
+
+public class PlatosDomain implements Serializable {
     private String nombre;
     private String pic;
     private String descripcion;

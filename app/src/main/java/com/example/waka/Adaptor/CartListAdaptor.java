@@ -95,7 +95,7 @@ public class CartListAdaptor extends RecyclerView.Adapter<CartListAdaptor.ViewHo
             totalEachItem=itemView.findViewById(R.id.totalEachItem);
             num=itemView.findViewById(R.id.numberItemTxt);
             plusItem=itemView.findViewById(R.id.plusCartBtn);
-            minusItem=itemView.findViewById(R.id.minusBtn);
+            minusItem=itemView.findViewById(R.id.minusCartBtn);
         }
 
     }

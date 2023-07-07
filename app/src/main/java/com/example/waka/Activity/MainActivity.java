@@ -34,44 +34,37 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerViewCategory();
         recyclerViewBebidas();
-       // bottomNavigation();
+        bottomNavigation();
     }
 
-    /*private void bottomNavigation(){
+    private void bottomNavigation(){
+
         FloatingActionButton floatingActionButton=findViewById(R.id.cartBtn);
-        //LinearLayout homeBtn=findViewById(R.id)
+        //LinearLayout homeBtn=findViewById(R.id);
         floatingActionButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 startActivity(new Intent(MainActivity.this, CartListActivity.class));
 
             }
         });
-    }*/
+    }
 
 
     private void recyclerViewCategory(){
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
-        recyclerViewCategoryList=findViewById(R.id.recyclerView);
-        recyclerViewCategoryList.setLayoutManager(linearLayoutManager);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewBebidasList=findViewById(R.id.recyclerView);
+        recyclerViewBebidasList.setLayoutManager(linearLayoutManager);
 
-        /*ArrayList<PlatoFondoDomain> platoFondo=new ArrayList<>();
-        platoFondo.add(new PlatoFondoDomain("Cabrito Tierno", "cat_1"));
-        platoFondo.add(new PlatoFondoDomain("Pato Estofado", "cat_2"));
-        platoFondo.add(new PlatoFondoDomain("Arroz con Pato", "cat_3"));
-        platoFondo.add(new PlatoFondoDomain("Bistec a lo Pobre", "cat_4"));
-        platoFondo.add(new PlatoFondoDomain("Pescado apanado de Tollo", "cat_5"));
+        ArrayList<BebidasDomain> platos=new ArrayList<>();
+        platos.add(new BebidasDomain("Cabrito Tierno", "cat_1", "Plato de Fondo", 29.99));
+        platos.add(new BebidasDomain("Pato Estofado", "cat_2","Plato de Fondo", 29.99));
+        platos.add(new BebidasDomain("Arroz con Pato", "cat_3","Plato de Fondo", 29.99));
+        platos.add(new BebidasDomain("Bistec a lo Pobre", "cat_4","Plato de Fondo", 29.99));
+        platos.add(new BebidasDomain("Pescado apanado de Tollo", "cat_5","Plato de Fondo", 28.99));
 
-        adapter=new PlatoFondoAdaptor(platoFondo);
-        recyclerViewCategoryList.setAdapter(adapter);*/
-        ArrayList<PlatosDomain> platos=new ArrayList<>();
-        platos.add(new PlatosDomain("Cabrito Tierno", "cat_1", "Plato de Fondo", 29.99));
-        platos.add(new PlatosDomain("Pato Estofado", "cat_2","Plato de Fondo", 29.99));
-        platos.add(new PlatosDomain("Arroz con Pato", "cat_3","Plato de Fondo", 29.99));
-        platos.add(new PlatosDomain("Bistec a lo Pobre", "cat_4","Plato de Fondo", 29.99));
-        platos.add(new PlatosDomain("Pescado apanado de Tollo", "cat_5","Plato de Fondo", 28.99));
+        adapter=new BebidasAdaptor(platos);
+        recyclerViewBebidasList.setAdapter(adapter);
 
-        adapter=new PlatosAdaptor(platos);
-        recyclerViewCategoryList.setAdapter(adapter);
 
     }
 

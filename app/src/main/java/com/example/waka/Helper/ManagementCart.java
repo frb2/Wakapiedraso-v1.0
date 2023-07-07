@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.example.waka.Domain.BebidasDomain;
+import com.example.waka.Domain.PlatosDomain;
 import com.example.waka.Interface.ChangeNumberItemsListener;
 
 import java.util.ArrayList;
@@ -35,14 +36,36 @@ public class ManagementCart {
                 listFood.add(item);
 
             }
-            tinyDB.putListObject("CardList",listFood);
+            tinyDB.putListObject("CartList",listFood);
         Toast.makeText(context, "Agregado al carrito", Toast.LENGTH_SHORT).show();
     }
+    /*public void insertFoodPlatos(PlatosDomain item){
+        ArrayList<PlatosDomain> listPlatos=getListCart();
+        boolean existAlready=false;
+        int n=0;
+        for (int i = 0; i < listPlatos.size(); i++) {
+            if (listPlatos.get(i).getDescripcion().equals(item.getNombre())){
+                existAlready=true;
+                n=i;
+                break;
+
+            }
+        }
+        if(existAlready){
+            listPlatos.get(n).setNumberInCart(item.getNumberInCart());
+        }else{
+            listPlatos.add(item);
+
+        }
+        tinyDB.putListObject("CartList",listPlatos);
+        Toast.makeText(context, "Agregado al carrito", Toast.LENGTH_SHORT).show();
+    }*/
 
     public ArrayList<BebidasDomain> getListCart(){
         return tinyDB.getListObject("CartList");
 
     }
+
 
     public void plusNumberBebidas(ArrayList<BebidasDomain> listBebidas, int position, ChangeNumberItemsListener changeNumberItemsListener){
         listBebidas.get(position).setNumberInCart(listBebidas.get(position).getNumberInCart()+1);

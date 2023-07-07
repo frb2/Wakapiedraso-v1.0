@@ -1,5 +1,6 @@
 package com.example.waka.Adaptor;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.waka.Activity.ShowDetailActivity;
 import com.example.waka.Domain.PlatosDomain;
 import com.example.waka.R;
 
@@ -38,6 +40,14 @@ public class PlatosAdaptor extends RecyclerView.Adapter<PlatosAdaptor.ViewHolder
         Glide.with(holder.itemView.getContext())
                 .load(drawableResourceId)
                 .into(holder.pic);
+        holder.addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(holder.itemView.getContext(), ShowDetailActivity.class);
+                intent.putExtra("object",platosDomains.get(position));
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
 
     }
     @Override

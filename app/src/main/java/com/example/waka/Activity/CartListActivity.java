@@ -39,7 +39,7 @@ public class CartListActivity extends AppCompatActivity {
 
 
 
-   /* private void bottomNavigation(){
+    private void bottomNavigation(){
         FloatingActionButton floatingActionButton=findViewById(R.id.cartBtn);
         //LinearLayout homeBtn=findViewById(R.id)
         floatingActionButton.setOnClickListener(new View.OnClickListener(){
@@ -48,7 +48,7 @@ public class CartListActivity extends AppCompatActivity {
 
             }
         });
-    }*/
+    }
     private void initView(){
         recyclerViewList=findViewById(R.id.recyclerView);
         totalFeeTxt=findViewById(R.id.totalFeeTxt);
@@ -56,6 +56,7 @@ public class CartListActivity extends AppCompatActivity {
         totalTxt=findViewById(R.id.totalTxt);
         emptyTxt=findViewById(R.id.emptyTxt);
         scrollView=findViewById(R.id.scrollView3);
+        recyclerViewList=findViewById(R.id.cartView);
     }
 
     private void initList(){
