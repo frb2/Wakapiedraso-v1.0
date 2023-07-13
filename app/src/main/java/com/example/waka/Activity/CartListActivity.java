@@ -4,17 +4,40 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.stripe.android.paymentsheet.flowcontroller.FlowControllerFactory;
+import com.stripe.android.paymentsheet.model.PaymentIntentClientSecret;
+import com.stripe.android.paymentsheet.model.PaymentOption;
+import com.stripe.android.paymentsheet.model.SetupIntentClientSecret;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
+import android.widget.Button;
 import com.example.waka.Adaptor.CartListAdaptor;
 import com.example.waka.Helper.ManagementCart;
 import com.example.waka.Interface.ChangeNumberItemsListener;
 import com.example.waka.R;
+import android.os.Bundle;
+import com.stripe.android.paymentsheet.PaymentSheet;
+import com.stripe.android.Stripe;
+import com.stripe.android.PaymentConfiguration;
+import com.stripe.android.paymentsheet.*;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class CartListActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
@@ -23,7 +46,13 @@ public class CartListActivity extends AppCompatActivity {
     TextView totalFeeTxt, taxTxt, totalTxt, emptyTxt;
     private double tax;
     private ScrollView scrollView;
-
+    Button button;
+    String SECRET_KEY="sk_test_51NSmoyDxu8p9UU5nqLfY9rQ0NmNp6nAmpCRWNybB9tz16QUYgxnFXoaeIPhS7AIUgP1ReDFmcn7pvXXtjxLHeyJC00kZScLNhT";
+    String PUBLISH_KEY="pk_test_51NSmoyDxu8p9UU5nBHHIBpEhmFE89hZRWpXyqYUoytL82bv3ly0YnP6pHkUdE784zOutzRRfW6cEd7EXZaOR3Mq800mTRuxpOc";
+    PaymentSheet paymentSheet;
+    String customerID;
+    String EphericalKey;
+    String ClientSecret;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +65,10 @@ public class CartListActivity extends AppCompatActivity {
         calculateCart();
 
     }
+
+
+
+
 
 
 

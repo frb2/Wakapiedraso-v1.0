@@ -2,6 +2,7 @@ package com.example.waka.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
@@ -70,6 +71,7 @@ public class ShowDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 objectBebidas.setNumberInCart(numberOrder);
                 managementCart.insertFood(objectBebidas);
+                startActivity(new Intent(ShowDetailActivity.this,MainActivity.class));
             }
         });
 

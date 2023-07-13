@@ -56,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewBebidasList.setLayoutManager(linearLayoutManager);
 
         ArrayList<BebidasDomain> platos=new ArrayList<>();
-        platos.add(new BebidasDomain("Cabrito Tierno", "cat_1", "Plato de Fondo", 29.99));
-        platos.add(new BebidasDomain("Pato Estofado", "cat_2","Plato de Fondo", 29.99));
-        platos.add(new BebidasDomain("Arroz con Pato", "cat_3","Plato de Fondo", 29.99));
-        platos.add(new BebidasDomain("Bistec a lo Pobre", "cat_4","Plato de Fondo", 29.99));
-        platos.add(new BebidasDomain("Pescado apanado de Tollo", "cat_5","Plato de Fondo", 28.99));
+        platos.add(new BebidasDomain("Cabrito Tierno", "cat_1", "Plato de Fondo", 30.00));
+        platos.add(new BebidasDomain("Pato Estofado", "cat_2","Plato de Fondo", 35.00));
+        platos.add(new BebidasDomain("Arroz con Pato", "cat_3","Plato de Fondo", 22.00));
+        platos.add(new BebidasDomain("Bistec a lo Pobre", "cat_4","Plato de Fondo", 25.00));
+        platos.add(new BebidasDomain("Pescado apanado de Tollo", "cat_5","Plato de Fondo", 28.00));
 
         adapter=new BebidasAdaptor(platos);
         recyclerViewBebidasList.setAdapter(adapter);
@@ -74,11 +74,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewBebidasList.setLayoutManager(linearLayoutManager);
 
         ArrayList<BebidasDomain> bebidas=new ArrayList<>();
-        bebidas.add(new BebidasDomain("Pilsen Trujillo", "cat_4", "Cerveza", 5.99));
-        bebidas.add(new BebidasDomain("Pilsen Callao", "cat_4","Cerveza", 6.99));
-        bebidas.add(new BebidasDomain("Gaseosa 1.5L", "cat_4","Gaseosa", 9.99));
-        bebidas.add(new BebidasDomain("Gaseosa Personal", "cat_4","Gaseosa", 15.99));
-        bebidas.add(new BebidasDomain("Jarra de Limonada", "cat_4","Bebida Natural", 5.99));
+        bebidas.add(new BebidasDomain("Pilsen Trujillo", "cat_4", "Cerveza", 5.00));
+        bebidas.add(new BebidasDomain("Pilsen Callao", "cat_4","Cerveza", 6.00));
+        bebidas.add(new BebidasDomain("Gaseosa 1.5L", "cat_4","Gaseosa", 9.00));
+        bebidas.add(new BebidasDomain("Gaseosa Personal", "cat_4","Gaseosa", 15.00));
+        bebidas.add(new BebidasDomain("Jarra de Limonada", "cat_4","Bebida Natural", 5.00));
 
         adapter2=new BebidasAdaptor(bebidas);
         recyclerViewBebidasList.setAdapter(adapter2);
