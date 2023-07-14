@@ -47,7 +47,7 @@ public class CartListActivity extends AppCompatActivity {
     TextView totalFeeTxt, taxTxt, totalTxt, emptyTxt;
     private double tax;
     private ScrollView scrollView;
-    ConstraintLayout button;
+    TextView button;
 
     String SECRET_KEY="sk_test_51NSmoyDxu8p9UU5nqLfY9rQ0NmNp6nAmpCRWNybB9tz16QUYgxnFXoaeIPhS7AIUgP1ReDFmcn7pvXXtjxLHeyJC00kZScLNhT";
     String PUBLISH_KEY="pk_test_51NSmoyDxu8p9UU5nBHHIBpEhmFE89hZRWpXyqYUoytL82bv3ly0YnP6pHkUdE784zOutzRRfW6cEd7EXZaOR3Mq800mTRuxpOc";
