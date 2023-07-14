@@ -1,7 +1,7 @@
 package com.example.waka.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,25 +12,23 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.stripe.android.paymentsheet.flowcontroller.FlowControllerFactory;
-import com.stripe.android.paymentsheet.model.PaymentIntentClientSecret;
-import com.stripe.android.paymentsheet.model.PaymentOption;
-import com.stripe.android.paymentsheet.model.SetupIntentClientSecret;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Button;
+
 import com.example.waka.Adaptor.CartListAdaptor;
 import com.example.waka.Helper.ManagementCart;
 import com.example.waka.Interface.ChangeNumberItemsListener;
 import com.example.waka.R;
-import android.os.Bundle;
+
 import android.widget.Toast;
 
 import com.stripe.android.paymentsheet.PaymentSheet;
-import com.stripe.android.Stripe;
+
 import com.stripe.android.PaymentConfiguration;
 import com.stripe.android.paymentsheet.*;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -49,7 +47,7 @@ public class CartListActivity extends AppCompatActivity {
     TextView totalFeeTxt, taxTxt, totalTxt, emptyTxt;
     private double tax;
     private ScrollView scrollView;
-    TextView button;
+    Button button;
 
     String SECRET_KEY="sk_test_51NSmoyDxu8p9UU5nqLfY9rQ0NmNp6nAmpCRWNybB9tz16QUYgxnFXoaeIPhS7AIUgP1ReDFmcn7pvXXtjxLHeyJC00kZScLNhT";
     String PUBLISH_KEY="pk_test_51NSmoyDxu8p9UU5nBHHIBpEhmFE89hZRWpXyqYUoytL82bv3ly0YnP6pHkUdE784zOutzRRfW6cEd7EXZaOR3Mq800mTRuxpOc";
@@ -74,7 +72,7 @@ public class CartListActivity extends AppCompatActivity {
         });
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 PaymentFlow();
             }
         });
@@ -87,7 +85,7 @@ public class CartListActivity extends AppCompatActivity {
                   JSONObject object=new JSONObject(response);
                   customerID=object.getString("id");
                   Toast.makeText(CartListActivity.this,customerID,Toast.LENGTH_SHORT).show();
-                  get.EphericalKey(customerID);
+                  getEphericalKey(customerID);
                 } catch (JSONException e){
                     e.printStackTrace();
                 }
@@ -102,7 +100,7 @@ public class CartListActivity extends AppCompatActivity {
             @Override
             public Map<String,String> getHeaders() throws AuthFailureError {
                 Map<String,String> header=new HashMap<>();
-                header.put("Authorization","Bearer"+SECRET_KEY);
+                header.put("Authorization","Bearer "+SECRET_KEY);
                 return header;
             }
         };
@@ -119,7 +117,7 @@ public class CartListActivity extends AppCompatActivity {
                             JSONObject object=new JSONObject(response);
                             EphericalKey=object.getString("id");
                             Toast.makeText(CartListActivity.this,EphericalKey,Toast.LENGTH_SHORT).show();
-                            get.ClientSecret(customerID,EphericalKey);
+                            getClientSecret(customerID,EphericalKey);
                         } catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -134,11 +132,11 @@ public class CartListActivity extends AppCompatActivity {
             @Override
             public Map<String,String> getHeaders() throws AuthFailureError {
                 Map<String,String> header=new HashMap<>();
-                header.put("Authorization","Bearer"+SECRET_KEY);
+                header.put("Authorization","Bearer "+SECRET_KEY);
                 header.put("Stripe-Version","2022-11-15");
-                return super.getHeaders();
+                return header;
             }
-
+            @Override
             protected Map<String,String> getParams() throws AuthFailureError{
                 Map<String,String> params=new HashMap<>();
                 params.put("customer",customerID);
@@ -174,8 +172,8 @@ private void getClientSecret(String customerID, String ephericalKey){
         @Override
         public Map<String,String> getHeaders() throws AuthFailureError {
             Map<String,String> header=new HashMap<>();
-            header.put("Authorization","Bearer"+SECRET_KEY);
-            return super.getHeaders();
+            header.put("Authorization","Bearer "+SECRET_KEY);
+            return header;
         }
 
         protected Map<String,String> getParams() throws AuthFailureError{
@@ -200,6 +198,8 @@ private void PaymentFlow(){
                         ))
         );
 }
+
+
 private void onPaymentResult(PaymentSheetResult paymentSheetResult){
         if (paymentSheetResult instanceof PaymentSheetResult.Completed){
             Toast.makeText(this,"pago aprobado",Toast.LENGTH_SHORT).show();
