@@ -27,6 +27,8 @@ import com.example.waka.Helper.ManagementCart;
 import com.example.waka.Interface.ChangeNumberItemsListener;
 import com.example.waka.R;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import com.stripe.android.paymentsheet.PaymentSheet;
 import com.stripe.android.Stripe;
 import com.stripe.android.PaymentConfiguration;
@@ -68,14 +70,27 @@ public class CartListActivity extends AppCompatActivity {
         button=findViewById(R.id.pagarbtn);
         PaymentConfiguration.init(this,PUBLISH_KEY);
         paymentSheet=new PaymentSheet(this,paymentSheetResult -> {
-
+        onPaymentResult(paymentSheetResult);
+        });
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PaymentFlow();
+            }
         });
         StringRequest stringRequest=new StringRequest(Request.Method.POST,
                 "https://api.stripe.com/v1/customers",
                 new Response.Listener<String>(){
                 @Override
                 public void onResponse(String response){
-
+                try {
+                  JSONObject object=new JSONObject(response);
+                  customerID=object.getString("id");
+                  Toast.makeText(CartListActivity.this,customerID,Toast.LENGTH_SHORT).show();
+                  get.EphericalKey(customerID);
+                } catch (JSONException e){
+                    e.printStackTrace();
+                }
                 }
                 },
                 new Response.ErrorListener(){
@@ -88,14 +103,108 @@ public class CartListActivity extends AppCompatActivity {
             public Map<String,String> getHeaders() throws AuthFailureError {
                 Map<String,String> header=new HashMap<>();
                 header.put("Authorization","Bearer"+SECRET_KEY);
-                return super.getHeaders();
+                return header;
             }
         };
         RequestQueue requestQueue=Volley.newRequestQueue(CartListActivity.this);
         requestQueue.add(stringRequest);
     };
+    private void getEphericalKey(String customerID){
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,
+                "https://api.stripe.com/v1/ephemeral_keys",
+                new Response.Listener<String>(){
+                    @Override
+                    public void onResponse(String response){
+                        try {
+                            JSONObject object=new JSONObject(response);
+                            EphericalKey=object.getString("id");
+                            Toast.makeText(CartListActivity.this,EphericalKey,Toast.LENGTH_SHORT).show();
+                            get.ClientSecret(customerID,EphericalKey);
+                        } catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
 
+                    }
+                }){
+            @Override
+            public Map<String,String> getHeaders() throws AuthFailureError {
+                Map<String,String> header=new HashMap<>();
+                header.put("Authorization","Bearer"+SECRET_KEY);
+                header.put("Stripe-Version","2022-11-15");
+                return super.getHeaders();
+            }
 
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String,String> params=new HashMap<>();
+                params.put("customer",customerID);
+                return params;
+            }
+
+        };
+        RequestQueue requestQueue=Volley.newRequestQueue(CartListActivity.this);
+        requestQueue.add(stringRequest);
+    }
+private void getClientSecret(String customerID, String ephericalKey){
+    StringRequest stringRequest=new StringRequest(Request.Method.POST,
+            "https://api.stripe.com/v1/payment_intents",
+            new Response.Listener<String>(){
+                @Override
+                public void onResponse(String response){
+                    try {
+                        JSONObject object=new JSONObject(response);
+                        ClientSecret=object.getString("client_secret");
+                        Toast.makeText(CartListActivity.this,ClientSecret,Toast.LENGTH_SHORT).show();
+
+                    } catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                }
+            },
+            new Response.ErrorListener(){
+                @Override
+                public void onErrorResponse(VolleyError error){
+
+                }
+            }){
+        @Override
+        public Map<String,String> getHeaders() throws AuthFailureError {
+            Map<String,String> header=new HashMap<>();
+            header.put("Authorization","Bearer"+SECRET_KEY);
+            return super.getHeaders();
+        }
+
+        protected Map<String,String> getParams() throws AuthFailureError{
+            Map<String,String> params=new HashMap<>();
+            params.put("customer",customerID);
+            params.put("amount","1000"+"00");
+            params.put("currency","usd");
+            params.put("automatic_payment_methods[enabled]","true");
+            return params;
+        }
+
+    };
+    RequestQueue requestQueue=Volley.newRequestQueue(CartListActivity.this);
+    requestQueue.add(stringRequest);
+
+}
+private void PaymentFlow(){
+        paymentSheet.presentWithPaymentIntent(
+                ClientSecret,new PaymentSheet.Configuration("Wakapiedra",
+                        new PaymentSheet.CustomerConfiguration(
+                                customerID,EphericalKey
+                        ))
+        );
+}
+private void onPaymentResult(PaymentSheetResult paymentSheetResult){
+        if (paymentSheetResult instanceof PaymentSheetResult.Completed){
+            Toast.makeText(this,"pago aprobado",Toast.LENGTH_SHORT).show();
+        }
+}
 
     private void bottomNavigation(){
         FloatingActionButton floatingActionButton=findViewById(R.id.cartBtn);
