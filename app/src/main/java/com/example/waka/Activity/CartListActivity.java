@@ -1,6 +1,7 @@
 package com.example.waka.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,7 +47,8 @@ public class CartListActivity extends AppCompatActivity {
     TextView totalFeeTxt, taxTxt, totalTxt, emptyTxt;
     private double tax;
     private ScrollView scrollView;
-    Button button;
+    ConstraintLayout button;
+
     String SECRET_KEY="sk_test_51NSmoyDxu8p9UU5nqLfY9rQ0NmNp6nAmpCRWNybB9tz16QUYgxnFXoaeIPhS7AIUgP1ReDFmcn7pvXXtjxLHeyJC00kZScLNhT";
     String PUBLISH_KEY="pk_test_51NSmoyDxu8p9UU5nBHHIBpEhmFE89hZRWpXyqYUoytL82bv3ly0YnP6pHkUdE784zOutzRRfW6cEd7EXZaOR3Mq800mTRuxpOc";
     PaymentSheet paymentSheet;
@@ -63,12 +65,35 @@ public class CartListActivity extends AppCompatActivity {
         initView();
         initList();
         calculateCart();
+        button=findViewById(R.id.pagarbtn);
+        PaymentConfiguration.init(this,PUBLISH_KEY);
+        paymentSheet=new PaymentSheet(this,paymentSheetResult -> {
 
-    }
+        });
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,
+                "https://api.stripe.com/v1/customers",
+                new Response.Listener<String>(){
+                @Override
+                public void onResponse(String response){
 
+                }
+                },
+                new Response.ErrorListener(){
+                @Override
+                public void onErrorResponse(VolleyError error){
 
-
-
+            }
+        }){
+            @Override
+            public Map<String,String> getHeaders() throws AuthFailureError {
+                Map<String,String> header=new HashMap<>();
+                header.put("Authorization","Bearer"+SECRET_KEY);
+                return super.getHeaders();
+            }
+        };
+        RequestQueue requestQueue=Volley.newRequestQueue(CartListActivity.this);
+        requestQueue.add(stringRequest);
+    };
 
 
 
